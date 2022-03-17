@@ -43,6 +43,7 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<?php ob_end_flush(); ?>
 </body>
 
 </html>
