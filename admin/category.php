@@ -202,11 +202,35 @@
                                     <div class="btn-group btn-group-sm">
                                        <a href="category.php?edit=<?php echo $cat_id;?>" type="button"
                                           class="btn btn-primary">Edit</a>
-                                       <a type="button" class="btn btn-danger">Delete</i></a>
+                                       <a type="button" class="btn btn-danger" data-toggle="modal"
+                                          data-target="#delete<?php echo $cat_id;?>">Delete</i></a>
                                        </ul>
                                     </div>
                               </td>
                            </tr>
+
+                           <!-- Modal -->
+                           <div class="modal fade" id="delete<?php echo $cat_id;?>" tabindex="-1"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this
+                                          category?</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                       <a href="category.php?delete=<?php echo $cat_id;?>" type="button"
+                                          class="btn btn-danger">Confirm</a>
+                                       <button type="button" class="btn btn-primary">Cancel</button>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
                            <?php         
                               }
 
@@ -221,6 +245,22 @@
                   </div>
                </div><!-- /.card -->
             </div><!-- /.col-6 -->
+
+            <!-- Delete Category -->
+            <?php 
+               if(isset($_GET['delete'])){
+                  $delete_id = $_GET['delete'];
+   $sql = "DELETE FROM category WHERE cat_id='$delete_id' ";
+   $delete_cat = mysqli_query($db,$sql);
+   if($delete_cat){
+      header('Location: category.php');
+   }
+   else{
+      die("Mysqli Error:" . mysqli_error($db));
+   }
+               }
+            
+            ?>
 
          </div><!-- /.row -->
       </div>
