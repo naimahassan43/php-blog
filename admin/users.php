@@ -167,7 +167,7 @@
                               </div>
                               <div class="form-group">
                                  <label>Repeat Password</label>
-                                 <input type="password" name="re-password" class="form-control" autocomplete="off"
+                                 <input type="password" name="rePassword" class="form-control" autocomplete="off"
                                     required>
                               </div>
                            </div>
@@ -216,7 +216,48 @@
    </section>
    <?php         }
             else if($do == 'Insert'){
-              echo "This page is for Insert";
+              if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
+                 $fullname    = $_POST['fullname'];
+                 $username    = $_POST['username'];
+                 $email       = $_POST['email'];
+                 $password    = $_POST['password'];
+                 $rePassword  = $_POST['rePassword'];
+                 $phone       = $_POST['phone'];
+                 $address     = $_POST['address'];
+                 $role        = $_POST['role'];
+                 $status      = $_POST['status'];
+
+                 $image       = $_FILES['image'];
+                 $imageName   = $_FILES['image']['name'];
+                 $imageTmp    = $_FILES['image']['tmp_name'];
+
+                 if($password == $rePassword){
+                     $hassedPass = sha1($password);
+                     $image = rand(0, 500000) . '_' . $imageName;
+                     move_uploaded_file($imageTmp, "img/users/" . $image);
+
+                     $sql = "INSERT INTO users (fullname,email,username,password,phone,address,role,status,image,join_date) VALUES ('$fullname','$email','$username','$hassedPass','$phone','$address','$role','$status','$image', now())";
+                     $addUser = mysqli_query($db, $sql);
+
+                     if($addUser){
+                        header("Location: users.php?do=Manage");
+                     } else{
+                        die("MySQLi Error" . mysqli_error($db));
+                     }
+                 } else { ?>
+
+   <div class="content">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="alert alert-warning">Your Given Information is not valid. Please try again.</div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <?php  }
+              }
                   }
                   else  if($do == 'Edit'){
                     echo "This page is for Edit";
