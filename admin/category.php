@@ -204,7 +204,7 @@
                                           class="btn btn-primary">Edit</a>
                                        <a type="button" class="btn btn-danger" data-toggle="modal"
                                           data-target="#delete<?php echo $cat_id;?>">Delete</i></a>
-                                       </ul>
+
                                     </div>
                               </td>
                            </tr>

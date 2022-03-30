@@ -63,13 +63,13 @@
                </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     <a href="pages/UI/general.html" class="nav-link">
+                     <a href="users.php?do=Manage" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Manage Users</p>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="pages/UI/general.html" class="nav-link">
+                     <a href="users.php?do=Add" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Add New User</p>
                      </a>
